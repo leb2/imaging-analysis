@@ -1,0 +1,19 @@
+<div id="navbar">
+  <div class="navbar-item">
+    <a href="/">
+      Site
+    </a>
+    <a href="/home">
+      Home
+    </a>
+    {{#if user}}
+      <a href='/logout'>
+        {{ user.displayName }} (log out)
+      </a>
+    {{else}}
+      <a href='/login' class="login">
+        Login
+      </a>
+    {{/if}}
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<div id="home">
+  <div class="color-background"></div>
+
+  <div class="relative-container">
+    <div class="container-inner">
+      {{> navbar }}
+
+      <div class="card files">
+        <div class="card-header">Your Files</div>
+        <div class="card-content">
+          <div class="upload-container">
+            <button type="button" class='button-clear-dark'
+                    data-toggle="modal" data-target="#uploadModal">
+              Upload File
+            </button>
+          </div>
+
+          <div class="path-container">
+            <div class="path">
+              Some path
+            </div>
+          </div>
+          <div class="files-container">
+            {{#each files}}
+              <div class="file">
+                IS directory?: {{ this.isDirectory }} <br/>
+                {{ this.name }}
+              </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='modal fade' id='uploadModal' tabindex="-1">
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+      <div class='card-title'>
+        Choose Upload
+      </div>
+      <form action='/file' method='post' encType="multipart/form-data" id='uploadForm'>
+
+        <input name="algorithm" type="text" value="{{ algorithm }}" style="display: none"/>
+
+        <div class='form-item'>
+          <input type="file" name="uploadedFile" id='uploadFile'>
+        </div>
+        <div class='form-item'>
+          <label>Filename</label>
+          <input type='text' id='newFileName' name='fileDisplayName'/>
+        </div>
+        <div class='warning'></div>
+        <div class='form-item align-center'>
+          <input type='submit' value='Upload!' id='submit' class='button-secondary'/>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>  <!-- /.modal -->
