@@ -45,11 +45,12 @@ router.post('/', loggedIn, upload.single('uploadedFile'), function(req, res) {
   const destination_path = path.join(user_dir, req.file.originalname);
   const source_path = req.file.path;
 
-  cp.execSync('mkdir ' + user_dir);
+  cp.execSync('mkdir -p ' + user_dir);
   fs.renameSync(source_path, destination_path);
 
   if (req.file.originalname.slice(req.file.originalname.length - 4) == '.zip') {
     cp.execSync('unzip ' + destination_path, {cwd: user_dir});
+    cp.execSync('rm ' + destination_path);
   }
 
   res.redirect('home');

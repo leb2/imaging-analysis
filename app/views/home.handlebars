@@ -9,23 +9,39 @@
         <div class="card-header">Your Files</div>
         <div class="card-content">
           <div class="upload-container">
-            <button type="button" class='button-clear-dark'
-                    data-toggle="modal" data-target="#uploadModal">
+            <button type="button" data-toggle="modal" data-target="#uploadModal">
               Upload File
             </button>
           </div>
 
           <div class="path-container">
+            <div class="back-button">
+              <a class="button" href="/home?path={{path}}&back=true">
+                Go back
+              </a>
+            </div>
             <div class="path">
-              Some path
+              {{ path }}
             </div>
           </div>
+
+
           <div class="files-container">
             {{#each files}}
-              <div class="file">
-                IS directory?: {{ this.isDirectory }} <br/>
-                {{ this.name }}
-              </div>
+              {{#if this.isDirectory}}
+                <a href="/home?path={{ ../path }}/{{ this.name }}">
+                  <div class="file">
+                    <i class="ion-ios-folder"></i>
+                    Directory:
+                    {{ this.name }}
+                  </div>
+                </a>
+              {{else}}
+                <div class="file">
+                  <i class="ion-document-text"></i>
+                  {{ this.name }}
+                </div>
+              {{/if}}
             {{/each}}
           </div>
         </div>

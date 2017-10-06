@@ -29,10 +29,16 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/home', loggedIn, function (req, res, next) {
-  const rel_path = req.query.path == undefined ? "" : req.query.path;
+  let rel_path = req.query.path == undefined ? "" : req.query.path;
+  const back = req.query.back != undefined;
+
+  if (back) {
+    rel_path = rel_path.substr(0, rel_path.lastIndexOf("/"));
+  }
 
   const user_id = req.user._id.toString();
   const user_dir = path.join(config.root, 'uploads', user_id, rel_path);
+  console.log(user_dir);
 
   fs.readdir(user_dir, function(err, items) {
     if (items == undefined) {
@@ -47,7 +53,7 @@ router.get('/home', loggedIn, function (req, res, next) {
           isDirectory: isDirectory
         })
       }
-      res.render('home', {files: files});
+      res.render('home', {files: files, path: rel_path});
     }
   });
 });
