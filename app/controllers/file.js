@@ -30,7 +30,7 @@ const config = require('../../config/config');
 var upload = multer({
   dest: '/tmp/imaging-tools/',
   limits: {
-    fileSize: 2000000 // 2 MB
+    fileSize: 4000000000 // 4 GB
   }
 });
 
@@ -38,10 +38,14 @@ module.exports = function(app) {
   app.use('/file', router);
 };
 
+function get_user_dir(user) {
+  return path.join(config.root, 'uploads', user._id.toString());
+}
+
 
 // Links uploaded file to file object in database
 router.post('/', loggedIn, upload.single('uploadedFile'), function(req, res) {
-  const user_dir = path.join(config.root, 'uploads', req.user._id.toString());
+  const user_dir = get_user_dir(req.user);
   const destination_path = path.join(user_dir, req.file.originalname);
   const source_path = req.file.path;
 
@@ -54,6 +58,17 @@ router.post('/', loggedIn, upload.single('uploadedFile'), function(req, res) {
   }
 
   res.redirect('home');
+});
+
+router.post('/delete', loggedIn, function(req, res) {
+  let user_dir = get_user_dir(req.user);
+  let rel_path = req.body.path;
+  let file = req.body.file;
+  let full_path = path.join(user_dir, rel_path, file);
+
+  // TODO: Make this actual remove
+  cp.execSync('mv ' + full_path + ' /Users/Brendan/.Trash');
+  res.sendStatus(200);
 });
 
 router.get('/download/:id', loggedIn, function(req, res) {

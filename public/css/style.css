@@ -23,6 +23,9 @@ a {
 .html, body {
   color: #444; }
 
+.hidden {
+  display: none; }
+
 .color-background {
   height: 200px;
   background: #74a577;
@@ -87,3 +90,9 @@ a {
       text-align: left; }
       #home .card.files .files-container .file {
         padding: 16px 14px; }
+        #home .card.files .files-container .file .close-icon {
+          padding-bottom: 8px;
+          float: right; }
+          #home .card.files .files-container .file .close-icon:hover {
+            cursor: pointer;
+            color: black; }

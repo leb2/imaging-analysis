@@ -2,6 +2,10 @@
   color: #444;
 }
 
+.hidden {
+  display: none;
+}
+
 .color-background {
   height: 200px;
   background: $color-primary;

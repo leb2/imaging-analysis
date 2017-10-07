@@ -20,6 +20,16 @@
 
       .file {
         padding: 16px 14px;
+
+        .close-icon {
+          padding-bottom: 8px;
+          float: right;
+
+          &:hover {
+            cursor: pointer;
+            color: black;
+          }
+        }
       }
     }
   }
