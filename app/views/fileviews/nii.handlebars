@@ -1,0 +1,22 @@
+
+<script type="text/javascript">
+  var params = [];
+  var path = "{{ path }}";
+  var url = "/file/data?path=" + path;
+
+  params["images"] = [url];
+
+</script>
+
+<div id="nii">
+  <div class="path">
+    {{ path }}
+  </div>
+  This is the nii view page
+
+  <div class="papaya-container">
+    <div class="papaya" data-params="params"></div>
+  </div>
+</div>
+
+<script type="text/javascript" src="/js/nii-view.js"></script>

@@ -39,8 +39,10 @@
                 </div>
               {{else}}
                 <div class="file">
-                  <i class="ion-document-text"></i>
-                  <span class="name">{{ this.name }}</span>
+                  <a href="/file/view?path={{ ../path }}/{{ this.name }}">
+                    <i class="ion-document-text"></i>
+                    <span class="name">{{ this.name }}</span>
+                  </a>
                   <i class="ion-close-round close-icon"></i>
                 </div>
               {{/if}}
