@@ -9,13 +9,24 @@
 </script>
 
 <div id="nii">
-  <div class="path">
-    {{ path }}
-  </div>
-  This is the nii view page
+  <div class="color-background"></div>
 
-  <div class="papaya-container">
-    <div class="papaya" data-params="params"></div>
+  <div class="relative-container">
+    <div class="container-inner">
+      {{> navbar }}
+
+      <div class="card">
+        <div class="card-content">
+            <div class="path-bar">
+              {{ path }}
+            </div>
+
+            <div class="papaya-container">
+              <div class="papaya" data-params="params"></div>
+            </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 

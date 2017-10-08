@@ -81,10 +81,11 @@ router.get('/view', loggedIn, function(req, res) {
   let rel_path = req.query.path;
   let full_path = path.join(user_dir, rel_path);
 
-  console.log("the full path:");
-  console.log(full_path);
-
-  res.render('fileviews/nii', {path: rel_path});
+  if (rel_path.endsWith(".nii") || rel_path.endsWith('.nii.gz')) {
+    res.render('fileviews/nii', {path: rel_path});
+  } else {
+    res.sendfile(full_path);
+  }
 });
 
 router.get('/data', loggedIn, function(req, res) {

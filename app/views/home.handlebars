@@ -9,23 +9,23 @@
       <div class="card files">
         <div class="card-header">Your Files</div>
         <div class="card-content">
-          <div class="upload-container">
+
+          <div class="buttons-container">
+            {{#if path}}
+              <a class="button" href="/home?path={{path}}&back=true">
+                Go back
+              </a>
+            {{/if}}
             <button type="button" data-toggle="modal" data-target="#uploadModal">
               Upload File
             </button>
           </div>
 
-          <div class="path-container">
-            <div class="back-button">
-              <a class="button" href="/home?path={{path}}&back=true">
-                Go back
-              </a>
-            </div>
-            <div class="path">
+          {{#if path}}
+            <div class="path-bar">
               {{ path }}
             </div>
-          </div>
-
+          {{/if}}
 
           <div class="files-container">
             {{#each files}}
@@ -57,7 +57,7 @@
 <div class='modal fade' id='uploadModal' tabindex="-1">
   <div class='modal-dialog'>
     <div class='modal-content'>
-      <div class='card-title'>
+      <div class='modal-title'>
         Choose Upload
       </div>
       <form action='/file' method='post' encType="multipart/form-data" id='uploadForm'>
@@ -67,13 +67,9 @@
         <div class='form-item'>
           <input type="file" name="uploadedFile" id='uploadFile'>
         </div>
-        <div class='form-item'>
-          <label>Filename</label>
-          <input type='text' id='newFileName' name='fileDisplayName'/>
-        </div>
         <div class='warning'></div>
-        <div class='form-item align-center'>
-          <input type='submit' value='Upload!' id='submit' class='button-secondary'/>
+        <div class='form-item align-center button-container'>
+          <input type='submit' value='Upload!' id='submit' class='button'/>
         </div>
       </form>
     </div>

@@ -26,6 +26,20 @@ a {
 .hidden {
   display: none; }
 
+button, .button {
+  padding: 11px;
+  background: none;
+  border: 1px solid #999;
+  color: #555;
+  text-transform: uppercase;
+  font-size: 12px;
+  transition: background 0.1s;
+  border-radius: 1px;
+  min-width: 120px; }
+  button:hover, .button:hover {
+    text-decoration: none;
+    background: #FAFAFA; }
+
 .color-background {
   height: 200px;
   background: #74a577;
@@ -51,10 +65,33 @@ a {
   .card .card-header {
     text-transform: uppercase;
     padding: 40px;
+    padding-bottom: 0px;
     text-align: left;
     font-size: 1.8em; }
   .card .card-content {
     padding: 40px; }
+
+.path-bar {
+  background: #EFEFEF;
+  padding: 12px;
+  border-radius: 2px;
+  font-size: 12px;
+  margin: 24px 8px;
+  color: #666; }
+
+.modal .modal-title {
+  text-transform: uppercase;
+  font-size: 20px;
+  margin-bottom: 30px; }
+
+.modal .modal-content {
+  padding: 20px; }
+
+.modal .button-container {
+  text-align: right;
+  margin-top: 30px; }
+  .modal .button-container .button {
+    width: 120px; }
 
 #navbar {
   position: relative;
@@ -81,13 +118,16 @@ a {
   background: #FEFEFE; }
   #home .card.files {
     min-height: 500px; }
-    #home .card.files .path-container {
-      margin: 20px 0; }
+    #home .card.files .buttons-container button, #home .card.files .buttons-container .button {
+      margin: 8px; }
     #home .card.files .files-container {
       width: 100%;
-      border-radius: 3px;
-      border: 1px solid #DDD;
-      text-align: left; }
+      border-radius: 1px;
+      border: 1px solid #999;
+      text-align: left;
+      margin-top: 12px; }
+      #home .card.files .files-container a {
+        color: #5a8c5d; }
       #home .card.files .files-container .file {
         padding: 16px 14px; }
         #home .card.files .files-container .file .close-icon {
@@ -96,3 +136,6 @@ a {
           #home .card.files .files-container .file .close-icon:hover {
             cursor: pointer;
             color: black; }
+
+#nii .papaya-toolbar {
+  display: none; }

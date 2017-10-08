@@ -6,6 +6,23 @@
   display: none;
 }
 
+button, .button {
+  padding: 11px;
+  background: none;
+  border: 1px solid $line-color;
+  color: #555;
+  text-transform: uppercase;
+  font-size: 12px;
+  transition: background 0.1s;
+  border-radius: 1px;
+  min-width: 120px;
+
+  &:hover {
+    text-decoration: none;
+    background: #FAFAFA;
+  }
+}
+
 .color-background {
   height: 200px;
   background: $color-primary;
@@ -37,11 +54,43 @@
   .card-header {
     text-transform: uppercase;
     padding: 40px;
+    padding-bottom: 0px;
     text-align: left;
     font-size: 1.8em;
   }
 
   .card-content {
     padding: 40px;
+  }
+}
+
+.path-bar {
+  background: #EFEFEF;
+  padding: 12px;
+  border-radius: 2px;
+  font-size: 12px;
+  margin: 24px 8px;
+  color: #666;
+}
+
+
+.modal {
+  .modal-title {
+    text-transform: uppercase;
+    font-size: 20px;
+    margin-bottom: 30px;
+  }
+
+  .modal-content {
+    padding: 20px;
+  }
+
+  .button-container {
+    text-align: right;
+    margin-top: 30px;
+
+    .button {
+      width: 120px;
+    }
   }
 }
