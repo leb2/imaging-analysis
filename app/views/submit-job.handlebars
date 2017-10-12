@@ -1,0 +1,46 @@
+<div id="submit-job">
+  <div class="color-background"></div>
+
+  <div class="relative-container">
+    <div class="container-inner">
+      {{> navbar }}
+      <div class="card">
+        <div class="card-header">
+          Submit a job
+        </div>
+        <div class="card-content">
+          <div>
+            Choose a script path:
+            <input type="text" id="script-path"/>
+          </div>
+
+          <div>
+            Choose a target path:
+            <input type="text" id="target-path"/>
+          </div>
+
+          <button id="submit">
+            Submit job
+          </button>
+
+          <br/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(function() {
+    $('button#submit').click(function() {
+        $.ajax({
+          method: 'POST',
+          url: '/job/run/',
+          data: {
+            scriptPath: $('#script-path').val(),
+            argPath: $('#target-path').val()
+          }
+        })
+    });
+  });
+</script>
