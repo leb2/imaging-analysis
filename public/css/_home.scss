@@ -2,40 +2,14 @@
   height: 100%;
   background: $background-color;
 
-  .card.files {
+  .files {
     min-height: 500px;
+  }
 
-    .buttons-container {
 
-      button, .button {
-        margin: 8px;
-      }
-    }
-
-    .files-container {
-      width: 100%;
-      border-radius: 1px;
-      border: 1px solid $line-color;
-      text-align: left;
-      margin-top: 12px;
-
-      a {
-        color: darken($color-primary, 10);
-      }
-
-      .file {
-        padding: 16px 14px;
-
-        .close-icon {
-          padding-bottom: 8px;
-          float: right;
-
-          &:hover {
-            cursor: pointer;
-            color: black;
-          }
-        }
-      }
+  .buttons-container {
+    button, .button {
+      margin: 8px;
     }
   }
 }

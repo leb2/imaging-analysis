@@ -8,6 +8,8 @@ const fs = require('fs');
 const path = require('path');
 const config = require('../../config/config');
 const cp = require('child_process');
+const listfiles = require('./shared/listfiles');
+const util = require('./shared/util');
 
 
 module.exports = function (app) {
@@ -31,29 +33,7 @@ router.get('/', function (req, res, next) {
 router.get('/home', loggedIn, function (req, res, next) {
   let rel_path = req.query.path == undefined ? "" : req.query.path;
   const back = req.query.back != undefined;
-
-  if (back) {
-    rel_path = rel_path.substr(0, rel_path.lastIndexOf("/"));
-  }
-
-  const user_id = req.user._id.toString();
-  const user_dir = path.join(config.root, 'uploads', user_id, rel_path);
-  console.log(user_dir);
-
-  fs.readdir(user_dir, function(err, items) {
-    if (items == undefined) {
-      res.render('home', {files: []});
-    } else {
-      files = [];
-      for (let i = 0; i < items.length; i++) {
-        let filepath = path.join(user_dir, items[i]);
-        let isDirectory = fs.statSync(filepath).isDirectory();
-        files.push({
-          name: items[i],
-          isDirectory: isDirectory
-        })
-      }
-      res.render('home', {files: files, path: rel_path});
-    }
-  });
+  listfiles(req.user, rel_path, back, function(results) {
+    res.render('home', results);
+  })
 });

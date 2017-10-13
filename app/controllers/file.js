@@ -11,6 +11,7 @@ var File = require("../models/file");
 const cp = require('child_process');
 const config = require('../../config/config');
 const util  = require('./shared/util');
+const listfiles = require('./shared/listfiles');
 
 var upload = multer({
   dest: '/tmp/imaging-tools/',
@@ -41,6 +42,16 @@ router.post('/', loggedIn, upload.single('uploadedFile'), function(req, res) {
 
   cp.execSync('chmod -R 755 ' + user_dir);
   res.redirect('home');
+});
+
+
+router.post('/list', loggedIn, function(req, res) {
+  let rel_path = req.body.path == undefined ? "" : req.body.path;
+  const back = req.body.back == undefined ? "" : req.body.back;
+
+  listfiles(req.user, rel_path, back, function(results) {
+    res.json(results);
+  });
 });
 
 router.post('/delete', loggedIn, function(req, res) {

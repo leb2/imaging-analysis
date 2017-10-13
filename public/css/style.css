@@ -93,6 +93,23 @@ button, .button {
   .modal .button-container .button {
     width: 120px; }
 
+.files-container {
+  width: 100%;
+  border-radius: 1px;
+  border: 1px solid #999;
+  text-align: left;
+  margin-top: 12px; }
+  .files-container a {
+    color: #5a8c5d; }
+  .files-container .file {
+    padding: 16px 14px; }
+    .files-container .file .close-icon {
+      padding-bottom: 8px;
+      float: right; }
+      .files-container .file .close-icon:hover {
+        cursor: pointer;
+        color: black; }
+
 #navbar {
   position: relative;
   top: 0;
@@ -116,26 +133,25 @@ button, .button {
 #home {
   height: 100%;
   background: #FEFEFE; }
-  #home .card.files {
+  #home .files {
     min-height: 500px; }
-    #home .card.files .buttons-container button, #home .card.files .buttons-container .button {
-      margin: 8px; }
-    #home .card.files .files-container {
-      width: 100%;
-      border-radius: 1px;
-      border: 1px solid #999;
-      text-align: left;
-      margin-top: 12px; }
-      #home .card.files .files-container a {
-        color: #5a8c5d; }
-      #home .card.files .files-container .file {
-        padding: 16px 14px; }
-        #home .card.files .files-container .file .close-icon {
-          padding-bottom: 8px;
-          float: right; }
-          #home .card.files .files-container .file .close-icon:hover {
-            cursor: pointer;
-            color: black; }
+  #home .buttons-container button, #home .buttons-container .button {
+    margin: 8px; }
 
 #nii .papaya-toolbar {
   display: none; }
+
+#submit-job .section {
+  margin-bottom: 50px; }
+
+#submit-job .selected-path-container {
+  margin-bottom: 24px; }
+  #submit-job .selected-path-container .selected-label {
+    text-transform: uppercase;
+    font-size: 0.9em; }
+
+#submit-job .file {
+  padding: 10px; }
+  #submit-job .file:hover {
+    background: #FAFAFA;
+    cursor: pointer; }

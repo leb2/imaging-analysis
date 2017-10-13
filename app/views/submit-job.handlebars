@@ -8,10 +8,27 @@
         <div class="card-header">
           Submit a job
         </div>
+
+
         <div class="card-content">
-          <div>
-            Choose a script path:
-            <input type="text" id="script-path"/>
+
+          <div class="select-script section">
+            <button class="back hidden">
+              Back
+            </button>
+            <div class="current-path-container hidden">
+              <div class="path-bar">
+                <span class="current-path"></span>
+              </div>
+            </div>
+            <div class="selected-path-container">
+              <span class="selected-label">Select a Script: </span>
+              <span class="selected-path"></span>
+            </div>
+            <div>
+              <div class="files-container">
+              </div>
+            </div>
           </div>
 
           <div>
@@ -30,17 +47,4 @@
   </div>
 </div>
 
-<script>
-  $(function() {
-    $('button#submit').click(function() {
-        $.ajax({
-          method: 'POST',
-          url: '/job/run/',
-          data: {
-            scriptPath: $('#script-path').val(),
-            argPath: $('#target-path').val()
-          }
-        })
-    });
-  });
-</script>
+<script src="js/submit-job.js"></script>
