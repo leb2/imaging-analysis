@@ -155,3 +155,5 @@ button, .button {
   #submit-job .file:hover {
     background: #FAFAFA;
     cursor: pointer; }
+  #submit-job .file.selected {
+    background: #dae7db; }

@@ -47,7 +47,7 @@ router.post('/', loggedIn, upload.single('uploadedFile'), function(req, res) {
 
 router.post('/list', loggedIn, function(req, res) {
   let rel_path = req.body.path == undefined ? "" : req.body.path;
-  const back = req.body.back == undefined ? "" : req.body.back;
+  const back = req.body.back == undefined ? "" : JSON.parse(req.body.back);
 
   listfiles(req.user, rel_path, back, function(results) {
     res.json(results);

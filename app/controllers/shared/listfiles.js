@@ -11,9 +11,6 @@ module.exports = function(user, rel_path, back, callback) {
   console.log("Value of back: " + back);
   console.log("Rel path: " + rel_path);
 
-
-
-
   let user_dir = util.rel_to_full(user, rel_path);
 
   fs.readdir(user_dir, function(err, items) {

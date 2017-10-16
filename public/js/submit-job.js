@@ -13,7 +13,6 @@ $(function() {
 
 
   function getFiles(path, back, callback) {
-    console.log("path, back " + path + " " + back);
     $.ajax({
       method: 'POST',
       url: '/file/list/',
@@ -53,6 +52,7 @@ $(function() {
   let currentPath = '';
 
   function updatePathLabel(path) {
+    console.log("updating path label to be " + path);
     if (path) {
       $('.back').removeClass('hidden');
       $('.current-path-container').removeClass('hidden');
@@ -65,14 +65,15 @@ $(function() {
   }
 
   function changeDir(path, back) {
-    console.log("Changing dir to " + path + ", back: " + back);
 
     if (back === undefined) {
       back = false;
     }
 
     getFiles(path, back, function(result) {
+
       updatePathLabel(result.path);
+      path = result.path;
 
       let $container = $('.files-container');
       $container.empty();
@@ -100,7 +101,8 @@ $(function() {
       // Select a new path
       $('.file.non-directory').click(function() {
         selectedPath = $(this).find('.path').text();
-        console.log("Selecting path " + selectedPath);
+        $('.selected').removeClass('selected');
+        $(this).addClass('selected');
         $('.selected-path').text(selectedPath);
       });
     });

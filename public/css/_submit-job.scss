@@ -21,5 +21,9 @@
       background: #FAFAFA;
       cursor: pointer;
     }
+
+    &.selected {
+      background: lighten(desaturate($color-primary, 0), 33);
+    }
   }
 }
