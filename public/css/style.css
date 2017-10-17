@@ -160,3 +160,17 @@ button, .button {
     cursor: pointer; }
   #submit-job .file.selected {
     background: #dae7db; }
+
+#current-jobs table {
+  width: 100%; }
+  #current-jobs table td, #current-jobs table th {
+    border: 1px solid #666;
+    padding: 12px; }
+  #current-jobs table th {
+    text-transform: uppercase;
+    font-size: 0.8em;
+    background: #EFEFEF;
+    padding: 18px 12px; }
+  #current-jobs table td {
+    font-weight: 300;
+    font-size: 0.9em; }

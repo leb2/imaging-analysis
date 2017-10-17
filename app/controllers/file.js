@@ -60,9 +60,9 @@ router.post('/delete', loggedIn, function(req, res) {
   let file = req.body.file;
   let full_path = path.join(user_dir, rel_path, file);
 
-  // TODO: Make this actual remove
-  cp.execSync('mv ' + full_path + ' /Users/Brendan/.Trash');
-  res.sendStatus(200);
+  cp.exec('rm -rf ' + full_path, function() {
+    res.sendStatus(200);
+  });
 });
 
 router.get('/download/:id', loggedIn, function(req, res) {
@@ -89,15 +89,3 @@ router.get('/data', loggedIn, function(req, res) {
 
   res.sendFile(full_path);
 });
-
-/*
-http://localhost:3000/file/view?path=/ds001_R2.0.4/sub-01/func/sub-01_task-balloonanalogrisktask_run-01_bold.nii.gz
-*/
-
-
-// Returns requested file for download
-// router.get('/download/:id', loggedIn, function(req, res) {
-//   var outputExt= req.query.output === 'true' ? '_out.csv' : '';
-//   res.sendFile(path.join(__dirname, '../../uploads/files/') + req.params.id + outputExt);
-// });
-
