@@ -1,0 +1,36 @@
+<div id="current-jobs">
+  <div class="color-background"></div>
+
+  <div class="relative-container">
+    <div class="container-inner">
+      {{> navbar }}
+      <div class="card">
+        <div class="card-header">
+          Current Jobs
+        </div>
+        <div class="card-content">
+          <table>
+            <tr>
+              <th>Path</th>
+              <th>Finished</th>
+              <th>Started</th>
+            </tr>
+            {{# each jobs }}
+              <tr>
+                <td>
+                  {{ this.scriptPath }}
+                </td>
+                <td>
+                  {{ this.finished }}
+                </td>
+                <td>
+                  {{ relativeTime this.timestamp }}
+                </td>
+              </tr>
+            {{/each}}
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

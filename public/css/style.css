@@ -23,6 +23,9 @@ a {
 .html, body {
   color: #444; }
 
+.align-right {
+  text-align: right; }
+
 .hidden {
   display: none; }
 

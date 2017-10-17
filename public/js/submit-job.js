@@ -1,11 +1,13 @@
 $(function() {
+  let selectedPath = '';
+  let currentPath = '';
 
   $('button#submit').click(function() {
     $.ajax({
       method: 'POST',
       url: '/job/run/',
       data: {
-        scriptPath: $('#script-path').val(),
+        scriptPath: selectedPath,
         argPath: $('#target-path').val()
       }
     })
@@ -48,9 +50,6 @@ $(function() {
     </div>";
   }
 
-  let selectedPath = '';
-  let currentPath = '';
-
   function updatePathLabel(path) {
     console.log("updating path label to be " + path);
     if (path) {
@@ -65,7 +64,6 @@ $(function() {
   }
 
   function changeDir(path, back) {
-
     if (back === undefined) {
       back = false;
     }

@@ -8,6 +8,7 @@ const path = require('path');
 const config = require('../../config/config');
 const cp = require('child_process');
 const util = require('./shared/util');
+const JobSubmission = require('../models/job-submission');
 
 
 module.exports = function (app) {
@@ -37,9 +38,18 @@ router.post('/run', loggedIn, function(req, res, next) {
   let scriptCommand = scriptPath + ' ' + argPath;
   let fullCommand = cdCommand + ' && ./' + scriptCommand;
 
-  cp.exec(fullCommand, function() {
-    console.log("Script ran successfully: " + fullCommand);
-
-    res.status(200);
+  let jobSubmission = new JobSubmission({
+    scriptPath: scriptPath,
+    user_id: req.user._id
   });
+
+  jobSubmission.save(function() {
+    cp.exec(fullCommand, function() {
+      console.log("Script ran successfully: " + fullCommand);
+
+      jobSubmission.finished = true;
+      jobSubmission.save();
+    });
+    res.status(200);
+  })
 });

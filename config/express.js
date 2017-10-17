@@ -8,16 +8,25 @@ var bodyParser = require('body-parser');
 var compress = require('compression');
 var methodOverride = require('method-override');
 var exphbs  = require('express-handlebars');
+var Moment = require('moment');
 
 module.exports = function(app, config) {
   var env = process.env.NODE_ENV || 'development';
   app.locals.ENV = env;
   app.locals.ENV_DEVELOPMENT = env == 'development';
-  
+
+  let relativeTime = function(text) {
+    const moment = new Moment(text);
+    return moment.fromNow();
+  };
+
   app.engine('handlebars', exphbs({
     layoutsDir: config.root + '/app/views/layouts/',
     defaultLayout: 'main',
-    partialsDir: [config.root + '/app/views/partials/']
+    partialsDir: [config.root + '/app/views/partials/'],
+    helpers: {
+      'relativeTime': relativeTime
+    }
   }));
   app.set('views', config.root + '/app/views');
   app.set('view engine', 'handlebars');
@@ -43,7 +52,7 @@ module.exports = function(app, config) {
     err.status = 404;
     next(err);
   });
-  
+
   if(app.get('env') === 'development'){
     app.use(function (err, req, res, next) {
       res.status(err.status || 500);
