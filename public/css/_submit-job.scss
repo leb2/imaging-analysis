@@ -4,6 +4,30 @@
     margin-bottom: 50px;
   }
 
+  .current-path-container {
+    position: relative;
+
+    .back {
+      position: absolute;
+      left: 0;
+      height: 39px;
+      line-height: 39px;
+      font-size: 1.4em;
+      padding-left: 12px;
+      padding-right: 16px;
+      border: 1px solid #AAA;
+      border-radius: 4px;
+
+      &:hover {
+        cursor: pointer;
+        background: #FAFAFA;
+      }
+    }
+
+    .path-bar {
+      margin-left: 50px;
+    }
+  }
 
   .selected-path-container {
     margin-bottom: 24px;
@@ -14,16 +38,4 @@
     }
   }
 
-  .file {
-    padding: 10px;
-
-    &:hover {
-      background: #FAFAFA;
-      cursor: pointer;
-    }
-
-    &.selected {
-      background: lighten(desaturate($color-primary, 0), 33);
-    }
-  }
 }

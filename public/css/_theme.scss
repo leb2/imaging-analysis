@@ -106,13 +106,29 @@ button, .button {
   border: 1px solid $line-color;
   text-align: left;
   margin-top: 12px;
-
-  a {
-    color: darken($color-primary, 10);
-  }
+  max-height: 500px;
+  overflow: auto;
 
   .file {
-    padding: 16px 14px;
+    padding: 10px;
+
+    i {
+      min-width: 22px;
+      display: inline-block;
+    }
+
+    &.directory a, &.directory {
+      color: darken($color-primary, 10);
+    }
+
+    &.non-directory a, &.non-directory {
+      color: #555;
+    }
+
+    &:hover {
+      background: #FAFAFA;
+      cursor: pointer;
+    }
 
     .close-icon {
       padding-bottom: 8px;
@@ -122,6 +138,10 @@ button, .button {
         cursor: pointer;
         color: black;
       }
+    }
+
+    &.selected {
+      background: lighten(desaturate($color-primary, 0), 33);
     }
   }
 }

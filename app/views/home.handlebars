@@ -30,7 +30,7 @@
           <div class="files-container">
             {{#each files}}
               {{#if this.isDirectory}}
-                <div class="file">
+                <div class="file directory">
                   <a href="/home?path={{ ../path }}/{{ this.name }}">
                     <i class="ion-ios-folder"></i>
                     <span class="name">{{ this.name }}</span>
@@ -38,7 +38,7 @@
                   <i class="ion-close-round close-icon"></i>
                 </div>
               {{else}}
-                <div class="file">
+                <div class="file non-directory">
                   <a href="/file/view?path={{ ../path }}/{{ this.name }}">
                     <i class="ion-document-text"></i>
                     <span class="name">{{ this.name }}</span>

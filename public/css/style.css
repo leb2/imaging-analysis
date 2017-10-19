@@ -101,17 +101,29 @@ button, .button {
   border-radius: 1px;
   border: 1px solid #999;
   text-align: left;
-  margin-top: 12px; }
-  .files-container a {
-    color: #5a8c5d; }
+  margin-top: 12px;
+  max-height: 500px;
+  overflow: auto; }
   .files-container .file {
-    padding: 16px 14px; }
+    padding: 10px; }
+    .files-container .file i {
+      min-width: 22px;
+      display: inline-block; }
+    .files-container .file.directory a, .files-container .file.directory {
+      color: #5a8c5d; }
+    .files-container .file.non-directory a, .files-container .file.non-directory {
+      color: #555; }
+    .files-container .file:hover {
+      background: #FAFAFA;
+      cursor: pointer; }
     .files-container .file .close-icon {
       padding-bottom: 8px;
       float: right; }
       .files-container .file .close-icon:hover {
         cursor: pointer;
         color: black; }
+    .files-container .file.selected {
+      background: #dae7db; }
 
 #navbar {
   position: relative;
@@ -147,19 +159,29 @@ button, .button {
 #submit-job .section {
   margin-bottom: 50px; }
 
+#submit-job .current-path-container {
+  position: relative; }
+  #submit-job .current-path-container .back {
+    position: absolute;
+    left: 0;
+    height: 39px;
+    line-height: 39px;
+    font-size: 1.4em;
+    padding-left: 12px;
+    padding-right: 16px;
+    border: 1px solid #AAA;
+    border-radius: 4px; }
+    #submit-job .current-path-container .back:hover {
+      cursor: pointer;
+      background: #FAFAFA; }
+  #submit-job .current-path-container .path-bar {
+    margin-left: 50px; }
+
 #submit-job .selected-path-container {
   margin-bottom: 24px; }
   #submit-job .selected-path-container .selected-label {
     text-transform: uppercase;
     font-size: 0.9em; }
-
-#submit-job .file {
-  padding: 10px; }
-  #submit-job .file:hover {
-    background: #FAFAFA;
-    cursor: pointer; }
-  #submit-job .file.selected {
-    background: #dae7db; }
 
 #current-jobs table {
   width: 100%; }
