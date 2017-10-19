@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const config = require('../../config/config');
 const cp = require('child_process');
-const util = require('./shared/util');
+const Util = require('./shared/util');
 const JobSubmission = require('../models/job-submission');
 
 
@@ -29,12 +29,12 @@ router.get('/', loggedIn, function (req, res, next) {
 
 router.post('/run', loggedIn, function(req, res, next) {
   let scriptPath = req.body.scriptPath;
-  let argPath = req.body.argPath;
+  let argPath = Util.rel_to_full(req.user, req.body.argPath);
 
   console.log("Command: ");
   console.log(scriptPath + ' ' + argPath);
 
-  let cdCommand = 'cd ' + util.get_user_dir(req.user);
+  let cdCommand = 'cd ' + Util.get_user_dir(req.user);
   let scriptCommand = scriptPath + ' ' + argPath;
   let fullCommand = cdCommand + ' && ./' + scriptCommand;
 

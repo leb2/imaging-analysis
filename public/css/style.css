@@ -159,9 +159,9 @@ button, .button {
 #submit-job .section {
   margin-bottom: 50px; }
 
-#submit-job .current-path-container {
+#submit-job .path-container {
   position: relative; }
-  #submit-job .current-path-container .back {
+  #submit-job .path-container .back {
     position: absolute;
     left: 0;
     height: 39px;
@@ -169,12 +169,12 @@ button, .button {
     font-size: 1.4em;
     padding-left: 12px;
     padding-right: 16px;
-    border: 1px solid #AAA;
-    border-radius: 4px; }
-    #submit-job .current-path-container .back:hover {
+    border-radius: 2px;
+    border: 1px solid transparent; }
+    #submit-job .path-container .back:hover {
       cursor: pointer;
-      background: #FAFAFA; }
-  #submit-job .current-path-container .path-bar {
+      border: 1px solid #DDD; }
+  #submit-job .path-container .path-bar {
     margin-left: 50px; }
 
 #submit-job .selected-path-container {
