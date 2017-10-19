@@ -119,6 +119,10 @@ $(function() {
       data: {
         scriptPath: scriptSelector.selectedPath,
         argPath: argumentSelector.selectedPath
+      },
+      success: function() {
+        console.log("redirecting");
+        window.location.replace('/current-jobs');
       }
     })
   });

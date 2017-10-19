@@ -31,12 +31,13 @@ router.post('/run', loggedIn, function(req, res, next) {
   let scriptPath = req.body.scriptPath;
   let argPath = Util.rel_to_full(req.user, req.body.argPath);
 
-  console.log("Command: ");
-  console.log(scriptPath + ' ' + argPath);
 
   let cdCommand = 'cd ' + Util.get_user_dir(req.user);
   let scriptCommand = scriptPath + ' ' + argPath;
   let fullCommand = cdCommand + ' && ./' + scriptCommand;
+
+  console.log("Command: ");
+  console.log(fullCommand);
 
   let jobSubmission = new JobSubmission({
     scriptPath: scriptPath,
@@ -50,6 +51,6 @@ router.post('/run', loggedIn, function(req, res, next) {
       jobSubmission.finished = true;
       jobSubmission.save();
     });
-    res.status(200);
+    res.sendStatus(200);
   })
 });
