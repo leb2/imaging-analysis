@@ -32,7 +32,7 @@ a {
 button, .button {
   padding: 11px;
   background: none;
-  border: 1px solid #999;
+  border: 1px solid #DDD;
   color: #555;
   text-transform: uppercase;
   font-size: 12px;
@@ -60,6 +60,9 @@ button, .button {
 .relative-container {
   position: relative;
   top: -100px; }
+  @media (max-width: 650px) {
+    .relative-container {
+      top: -150px; } }
 
 .card {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.24), 0 1px 3px rgba(0, 0, 0, 0.12);
@@ -67,12 +70,16 @@ button, .button {
   text-align: left; }
   .card .card-header {
     text-transform: uppercase;
-    padding: 40px;
-    padding-bottom: 0px;
+    padding: 40px 40px 0;
     text-align: left;
     font-size: 1.8em; }
   .card .card-content {
     padding: 40px; }
+  @media (max-width: 800px) {
+    .card .card-header {
+      padding: 25px 25px 0; }
+    .card .card-content {
+      padding: 25px; } }
 
 .path-bar {
   background: #EFEFEF;
@@ -99,11 +106,12 @@ button, .button {
 .files-container {
   width: 100%;
   border-radius: 1px;
-  border: 1px solid #999;
   text-align: left;
+  background: #FAFAFA;
   margin-top: 12px;
   max-height: 500px;
-  overflow: auto; }
+  overflow: auto;
+  padding: 12px; }
   .files-container .file {
     padding: 10px; }
     .files-container .file i {
@@ -114,7 +122,7 @@ button, .button {
     .files-container .file.non-directory a, .files-container .file.non-directory {
       color: #555; }
     .files-container .file:hover {
-      background: #FAFAFA;
+      background: #E4E4E4;
       cursor: pointer; }
     .files-container .file .close-icon {
       padding-bottom: 8px;
@@ -132,18 +140,21 @@ button, .button {
   left: 0;
   color: black;
   z-index: 4;
-  height: 50px;
   text-align: left;
   padding-left: 24px; }
   #navbar .navbar-item {
     line-height: 50px; }
     #navbar .navbar-item a {
+      display: inline-block;
       color: white;
       text-decoration: none;
       text-transform: uppercase;
       font-weight: 100;
       font-size: 1em;
       padding: 0 12px; }
+      @media (max-width: 650px) {
+        #navbar .navbar-item a {
+          padding: 0 4px; } }
 
 #home {
   height: 100%;
@@ -184,15 +195,15 @@ button, .button {
     font-size: 0.9em; }
 
 #current-jobs table {
-  width: 100%; }
+  width: 100%;
+  background: #FAFAFA; }
   #current-jobs table td, #current-jobs table th {
-    border: 1px solid #666;
     padding: 12px; }
   #current-jobs table th {
     text-transform: uppercase;
     font-size: 0.8em;
-    background: #EFEFEF;
-    padding: 18px 12px; }
+    background: #E4E4E4;
+    padding: 24px 12px; }
   #current-jobs table td {
     font-weight: 300;
     font-size: 0.9em; }

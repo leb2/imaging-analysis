@@ -20,7 +20,7 @@ var config = {
     },
     port: process.env.PORT || 3000,
     domain: 'http://localhost:3000',
-    db: 'mongodb://localhost/utra-test'
+    db: 'mongodb://mongodb:27017/utra-test'
   },
 
   production: {
@@ -28,9 +28,10 @@ var config = {
     app: {
       name: 'utra'
     },
-    port: process.env.PORT || 3000,
-    domain: 'prod domain not defined',
-    db: 'mongodb://localhost/utra-production'
+    port: process.env.PORT || 4000,
+    domain: 'http://rapp.bigcomplexdata.com:4000',
+    db: 'mongodb://mongodb:27017/utra-production'
+    // db: 'mongodb://localhost/utra-production'
   }
 };
 
@@ -40,5 +41,8 @@ envConfig.facebookClientSecret = 'f59cbf3081c003f06cedbc220e5c9569';
 envConfig.googleClientId = '955665183738-69fafim72gagh8eigmlrsr4d2l54hkmn.apps.googleusercontent.com';
 envConfig.googleClientSecret = 'uZPCHL8kht9WCii_eEGjUNyv';
 envConfig.sessionSecret = '402769bd3831cfbe37e';
+envConfig.sessionSecret = '402769bd3831cfbe37e';
+envConfig.dbPassword = 'G0dj697iyZLR9OpgAvDG';
+
 
 module.exports = envConfig;

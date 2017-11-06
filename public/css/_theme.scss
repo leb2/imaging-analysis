@@ -48,6 +48,10 @@ button, .button {
   @extend .container;
   position: relative;
   top: -100px;
+
+  @media (max-width: 650px) {
+    top: -150px;
+  }
 }
 
 .card {
@@ -57,8 +61,7 @@ button, .button {
 
   .card-header {
     text-transform: uppercase;
-    padding: 40px;
-    padding-bottom: 0px;
+    padding: 40px 40px 0;
     text-align: left;
     font-size: 1.8em;
   }
@@ -66,6 +69,17 @@ button, .button {
   .card-content {
     padding: 40px;
   }
+
+  @media (max-width: 800px) {
+    .card-header {
+      padding: 25px 25px 0;
+    }
+
+    .card-content {
+      padding: 25px;
+    }
+  }
+
 }
 
 .path-bar {
@@ -103,11 +117,13 @@ button, .button {
 .files-container {
   width: 100%;
   border-radius: 1px;
-  border: 1px solid $line-color;
+  //border: 1px solid $line-color;
   text-align: left;
+  background: #FAFAFA;
   margin-top: 12px;
   max-height: 500px;
   overflow: auto;
+  padding: 12px;
 
   .file {
     padding: 10px;
@@ -126,7 +142,7 @@ button, .button {
     }
 
     &:hover {
-      background: #FAFAFA;
+      background: #E4E4E4;
       cursor: pointer;
     }
 

@@ -3,21 +3,25 @@ var express = require('express'),
     glob = require('glob'),
     mongoose = require('mongoose');
 
-mongoose.connect(config.db);
-var db = mongoose.connection;
-db.on('error', function () {
+
+setTimeout(function() {
+  mongoose.connect(config.db);
+  var db = mongoose.connection;
+  db.on('error', function (a) {
+    console.log("message?:");
+    console.log(a);
     throw new Error('unable to connect to database at ' + config.db);
-});
+  });
 
-var models = glob.sync(config.root + '/app/models/*.js');
-models.forEach(function (model) {
+  var models = glob.sync(config.root + '/app/models/*.js');
+  models.forEach(function (model) {
     require(model);
-});
-var app = express();
+  });
+  var app = express();
 
-module.exports = require('./config/express')(app, config);
+  module.exports = require('./config/express')(app, config);
 
-app.listen(config.port, function () {
+  app.listen(config.port, function () {
     console.log('Express server listening on port ' + config.port);
-});
-
+  });
+}, 5000);
