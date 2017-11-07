@@ -15,5 +15,8 @@ services:
       - "3000:3000"
     links:
       - mongodb
+#      - conda
     environment:
       - NODE_ENV=production
+#  conda:
+#    image: continuumio/anaconda3
