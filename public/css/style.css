@@ -113,7 +113,8 @@ button, .button {
   overflow: auto;
   padding: 12px; }
   .files-container .file {
-    padding: 10px; }
+    padding: 10px;
+    position: relative; }
     .files-container .file i {
       min-width: 22px;
       display: inline-block; }
@@ -124,12 +125,31 @@ button, .button {
     .files-container .file:hover {
       background: #E4E4E4;
       cursor: pointer; }
-    .files-container .file .close-icon {
+    .files-container .file .dropdown-icon {
       padding-bottom: 8px;
-      float: right; }
-      .files-container .file .close-icon:hover {
+      float: right;
+      color: #111; }
+      .files-container .file .dropdown-icon:hover {
         cursor: pointer;
         color: black; }
+    .files-container .file .file-dropdown-menu {
+      color: #111;
+      display: none;
+      position: absolute;
+      top: 30px;
+      right: 0;
+      z-index: 12;
+      background: white;
+      border-radius: 0;
+      width: 140px;
+      border: none;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+      .files-container .file .file-dropdown-menu .file-menu-item {
+        padding: 14px;
+        font-size: 0.8em;
+        text-transform: uppercase; }
+        .files-container .file .file-dropdown-menu .file-menu-item:hover {
+          background: rgba(0, 0, 0, 0.1); }
     .files-container .file.selected {
       background: #dae7db; }
 

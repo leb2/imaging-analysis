@@ -35,7 +35,15 @@
                     <i class="ion-ios-folder"></i>
                     <span class="name">{{ this.name }}</span>
                   </a>
-                  <i class="ion-close-round close-icon"></i>
+                  <i class="ion-arrow-down-b dropdown-icon"></i>
+                  <div class="file-dropdown-menu">
+                    <div class="file-menu-item delete">
+                      Delete Directory
+                    </div>
+                    <div class="file-menu-item share">
+                      Share Directory
+                    </div>
+                  </div>
                 </div>
               {{else}}
                 <div class="file non-directory">
@@ -43,7 +51,15 @@
                     <i class="ion-document-text"></i>
                     <span class="name">{{ this.name }}</span>
                   </a>
-                  <i class="ion-close-round close-icon"></i>
+                  <i class="ion-arrow-down-b dropdown-icon"></i>
+                  <div class="file-dropdown-menu">
+                    <div class="file-menu-item delete">
+                      Delete File
+                    </div>
+                    <div class="file-menu-item share">
+                      Share File
+                    </div>
+                  </div>
                 </div>
               {{/if}}
             {{/each}}

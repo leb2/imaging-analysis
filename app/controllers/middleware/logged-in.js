@@ -3,7 +3,6 @@ const config = require('../../../config/config');
 
 env = process.env.NODE_ENV || 'development';
 
-
 module.exports = function(req, res, next) {
   if (req.user) {
     next();
