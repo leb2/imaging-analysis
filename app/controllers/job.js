@@ -29,10 +29,10 @@ router.get('/', loggedIn, function (req, res, next) {
 
 router.post('/run', loggedIn, function(req, res, next) {
   let scriptPath = req.body.scriptPath;
-  let argPath = Util.rel_to_full(req.user, req.body.argPath);
+  let argPath = Util.rel_to_full(req.user._id, req.body.argPath);
 
 
-  let cdCommand = 'cd ' + Util.get_user_dir(req.user);
+  let cdCommand = 'cd ' + Util.get_user_dir(req.user._id);
   let scriptCommand = scriptPath + ' ' + argPath;
   let fullCommand = cdCommand + ' && ./' + scriptCommand;
 

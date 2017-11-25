@@ -49,7 +49,7 @@ router.post('/list', loggedIn, function(req, res) {
   let rel_path = req.body.path == undefined ? "" : req.body.path;
   const back = req.body.back == undefined ? "" : JSON.parse(req.body.back);
 
-  listfiles(req.user, rel_path, back, function(results) {
+  listfiles(req.user._id, rel_path, back, false, function(results) {
     res.json(results);
   });
 });

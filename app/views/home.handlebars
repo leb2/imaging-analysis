@@ -7,18 +7,27 @@
       {{> navbar }}
 
       <div class="card files">
-        <div class="card-header">Your Files</div>
+        <div class="card-header">
+          {{#if viewing}}
+            Viewing
+          {{else}}
+            Your Files
+          {{/if}}
+        </div>
         <div class="card-content">
 
           <div class="buttons-container">
             {{#if path}}
-              <a class="button" href="/home?path={{path}}&back=true">
+              <a class="button" href="/view/{{viewingId}}?path={{path}}&back=true">
                 Go back
               </a>
             {{/if}}
-            <button type="button" data-toggle="modal" data-target="#uploadModal">
-              Upload File
-            </button>
+
+            {{#unless viewing}}
+                <button type="button" data-toggle="modal" data-target="#uploadModal">
+                  Upload File
+                </button>
+            {{/unless}}
           </div>
 
           {{#if path}}
@@ -31,35 +40,43 @@
             {{#each files}}
               {{#if this.isDirectory}}
                 <div class="file directory">
-                  <a href="/home?path={{ ../path }}/{{ this.name }}">
+                  <a href="/view/{{../viewingId}}?path={{ ../path }}/{{ this.name }}">
                     <i class="ion-ios-folder"></i>
                     <span class="name">{{ this.name }}</span>
                   </a>
-                  <i class="ion-arrow-down-b dropdown-icon"></i>
-                  <div class="file-dropdown-menu">
-                    <div class="file-menu-item delete">
-                      Delete Directory
+
+                  {{#unless ../viewing}}
+                    <i class="ion-arrow-down-b dropdown-icon"></i>
+                    <div class="file-dropdown-menu">
+                      <div class="file-menu-item delete">
+                        Delete Directory
+                      </div>
+                      <div class="file-menu-item share" data-toggle="modal" data-target="#shareModal">
+                        Share Directory
+                      </div>
                     </div>
-                    <div class="file-menu-item share">
-                      Share Directory
-                    </div>
-                  </div>
+                  {{/unless}}
+
                 </div>
               {{else}}
                 <div class="file non-directory">
+
                   <a href="/file/view?path={{ ../path }}/{{ this.name }}">
                     <i class="ion-document-text"></i>
                     <span class="name">{{ this.name }}</span>
                   </a>
-                  <i class="ion-arrow-down-b dropdown-icon"></i>
-                  <div class="file-dropdown-menu">
-                    <div class="file-menu-item delete">
-                      Delete File
+
+                  {{#unless ../viewing}}
+                    <i class="ion-arrow-down-b dropdown-icon"></i>
+                    <div class="file-dropdown-menu">
+                      <div class="file-menu-item delete">
+                        Delete File
+                      </div>
+                      <div class="file-menu-item share" data-toggle="modal" data-target="#shareModal">
+                        Share File
+                      </div>
                     </div>
-                    <div class="file-menu-item share">
-                      Share File
-                    </div>
-                  </div>
+                  {{/unless}}
                 </div>
               {{/if}}
             {{/each}}
@@ -70,6 +87,21 @@
   </div>
 </div>
 
+<div class='modal fade' id='shareModal' tabindex="-1">
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+      <div class='modal-title'>
+        Share
+      </div>
+      Are you sure you want to share "<span class="share-target"></span>"? This
+      will make it visible to anyone with the url.
+      <br/>
+      <br/>
+      <button class="share-confirm">Share</button>
+    </div>
+  </div>
+</div>  <!-- /.modal -->
+
 <div class='modal fade' id='uploadModal' tabindex="-1">
   <div class='modal-dialog'>
     <div class='modal-content'>
@@ -77,9 +109,6 @@
         Choose Upload
       </div>
       <form action='/file' method='post' encType="multipart/form-data" id='uploadForm'>
-
-        <input name="algorithm" type="text" value="{{ algorithm }}" style="display: none"/>
-
         <div class='form-item'>
           <input type="file" name="uploadedFile" id='uploadFile'>
         </div>
@@ -92,4 +121,4 @@
   </div>
 </div>  <!-- /.modal -->
 
-<script src="js/home.js"></script>
+<script src="/js/home.js"></script>

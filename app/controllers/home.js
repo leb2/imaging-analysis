@@ -10,6 +10,7 @@ const config = require('../../config/config');
 const cp = require('child_process');
 const listfiles = require('./shared/listfiles');
 const util = require('./shared/util');
+const SharedPath = require('../models/shared-path');
 
 
 module.exports = function (app) {
@@ -30,10 +31,52 @@ router.get('/', function (req, res, next) {
   res.render('index');
 });
 
-router.get('/home', loggedIn, function (req, res, next) {
-  let rel_path = req.query.path == undefined ? "" : req.query.path;
-  const back = req.query.back != undefined;
-  listfiles(req.user, rel_path, back, function(results) {
-    res.render('home', results);
+/**
+ * Route to share a path, making it visible to the public
+ */
+router.post('/share', loggedIn, function(req, res, next) {
+  let sharedPath = new SharedPath({
+    path: req.body.path,
+    user_id: req.user._id
+  });
+
+  sharedPath.save(function(err) {
+    if (err) {
+      return next();
+    }
+    return res.sendStatus(200);
   })
 });
+
+router.get('/view', loggedIn, function(req, res) {
+  res.redirect('view/' + req.user._id.toString());
+});
+
+router.get('/view/:user_id', function(req, res, next) {
+  let rel_path = req.query.path == undefined ? "" : req.query.path;
+  const back = req.query.back != undefined;
+
+  let user_id = req.params.user_id;
+  let isViewing = req.user == undefined || user_id != req.user._id;
+
+  // TODO: Lookup
+  listfiles(user_id, rel_path, back, isViewing, function(results) {
+    if (results) {
+      results['viewing'] = isViewing;
+      results['viewingId'] = user_id;
+      res.render('home', results)
+
+    } else {
+      // File is not shared
+      return next();
+    }
+  });
+});
+
+// router.get('/home', loggedIn, function (req, res, next) {
+//   let rel_path = req.query.path == undefined ? "" : req.query.path;
+//   const back = req.query.back != undefined;
+//   listfiles(req.user._id, rel_path, back, function(results) {
+//     res.render('home', results);
+//   })
+// });
