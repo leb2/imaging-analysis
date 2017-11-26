@@ -24,9 +24,9 @@
             {{/if}}
 
             {{#unless viewing}}
-                <button type="button" data-toggle="modal" data-target="#uploadModal">
-                  Upload File
-                </button>
+              <button type="button" data-toggle="modal" data-target="#uploadModal">
+                Upload File
+              </button>
             {{/unless}}
           </div>
 
@@ -34,53 +34,62 @@
             <div class="path-bar">
               {{ path }}
             </div>
+          {{else}}
+            <div class="path-bar">
+              .
+            </div>
           {{/if}}
 
-          <div class="files-container">
-            {{#each files}}
-              {{#if this.isDirectory}}
-                <div class="file directory">
-                  <a href="/view/{{../viewingId}}?path={{ ../path }}/{{ this.name }}">
-                    <i class="ion-ios-folder"></i>
-                    <span class="name">{{ this.name }}</span>
-                  </a>
+          {{#if cannotAccess}}
+            Cannot view path {{ path }} of user {{viewingId}}
+          {{else}}
+            <div class="files-container">
+              {{#each files}}
+                {{#if this.isDirectory}}
+                  <div class="file directory">
+                    <a href="/view/{{../viewingId}}?path={{ ../path }}/{{ this.name }}">
+                      <i class="ion-ios-folder"></i>
+                      <span class="name">{{ this.name }}</span>
+                    </a>
 
-                  {{#unless ../viewing}}
-                    <i class="ion-arrow-down-b dropdown-icon"></i>
-                    <div class="file-dropdown-menu">
-                      <div class="file-menu-item delete">
-                        Delete Directory
+                    {{#unless ../viewing}}
+                      <i class="ion-arrow-down-b dropdown-icon"></i>
+                      <div class="file-dropdown-menu">
+                        <div class="file-menu-item delete">
+                          Delete Directory
+                        </div>
+                        <div class="file-menu-item share" data-toggle="modal" data-target="#shareModal">
+                          Share Directory
+                        </div>
                       </div>
-                      <div class="file-menu-item share" data-toggle="modal" data-target="#shareModal">
-                        Share Directory
-                      </div>
-                    </div>
-                  {{/unless}}
+                    {{/unless}}
 
-                </div>
-              {{else}}
-                <div class="file non-directory">
+                  </div>
+                {{else}}
+                  <div class="file non-directory">
 
-                  <a href="/file/view?path={{ ../path }}/{{ this.name }}">
-                    <i class="ion-document-text"></i>
-                    <span class="name">{{ this.name }}</span>
-                  </a>
+                    <a href="/file/view?path={{ ../path }}/{{ this.name }}">
+                      <i class="ion-document-text"></i>
+                      <span class="name">{{ this.name }}</span>
+                    </a>
 
-                  {{#unless ../viewing}}
-                    <i class="ion-arrow-down-b dropdown-icon"></i>
-                    <div class="file-dropdown-menu">
-                      <div class="file-menu-item delete">
-                        Delete File
+                    {{#unless ../viewing}}
+                      <i class="ion-arrow-down-b dropdown-icon"></i>
+                      <div class="file-dropdown-menu">
+                        <div class="file-menu-item delete">
+                          Delete File
+                        </div>
+                        <div class="file-menu-item share" data-toggle="modal" data-target="#shareModal">
+                          Share File
+                        </div>
                       </div>
-                      <div class="file-menu-item share" data-toggle="modal" data-target="#shareModal">
-                        Share File
-                      </div>
-                    </div>
-                  {{/unless}}
-                </div>
-              {{/if}}
-            {{/each}}
-          </div>
+                    {{/unless}}
+                  </div>
+                {{/if}}
+              {{/each}}
+            </div>
+          {{/if}}
+
         </div>
       </div>
     </div>

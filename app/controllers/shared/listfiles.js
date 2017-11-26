@@ -10,32 +10,35 @@ module.exports = function(user_id, rel_path, back, isViewing, callback) {
     rel_path = rel_path.substr(0, rel_path.lastIndexOf("/"));
   }
 
-  if (isViewing && !Util.is_shared(rel_path, user_id)) {
-    callback(false);
-    return;
-  }
+  // listfiles will return false if file is not viewable
+  Util.is_shared(rel_path, user_id, function(isShared) {
+    if (isViewing && !isShared) {
+      callback(false);
 
-  let user_dir = util.rel_to_full(user_id, rel_path);
-
-  fs.readdir(user_dir, function(err, items) {
-    if (items == undefined) {
-      callback({
-        files: [], path: ''
-      });
     } else {
-      files = [];
-      for (let i = 0; i < items.length; i++) {
-        let filepath = path.join(user_dir, items[i]);
-        let isDirectory = fs.statSync(filepath).isDirectory();
-        files.push({
-          name: items[i],
-          isDirectory: isDirectory
-        })
-      }
+      let user_dir = util.rel_to_full(user_id, rel_path);
 
-      callback({
-        files: files,
-        path: rel_path
+      fs.readdir(user_dir, function(err, items) {
+        if (items == undefined) {
+          callback({
+            files: [], path: ''
+          });
+        } else {
+          files = [];
+          for (let i = 0; i < items.length; i++) {
+            let filepath = path.join(user_dir, items[i]);
+            let isDirectory = fs.statSync(filepath).isDirectory();
+            files.push({
+              name: items[i],
+              isDirectory: isDirectory
+            })
+          }
+
+          callback({
+            files: files,
+            path: rel_path
+          });
+        }
       });
     }
   });

@@ -1,6 +1,7 @@
 let mongoose = require('mongoose');
+
 let Schema = mongoose.Schema;
-var ObjectId = mongoose.Schema.Types.ObjectId;
+let ObjectId = mongoose.Schema.Types.ObjectId;
 
 let sharedPathSchema = new Schema({
   path: String,

@@ -42,7 +42,6 @@ $(function() {
       },
       success: function(data) {
         file_elem.remove();
-        console.log(data);
       }
     });
   });

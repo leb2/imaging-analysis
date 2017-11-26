@@ -7,7 +7,7 @@ module.exports = function(req, res, next) {
   if (req.user) {
     next();
   } else {
-    if (env == 'development') {
+    if (false || env == 'development') {
       // TODO: Temp for debugging purposes only
       User.findById("59d3d46423b3cb3898c10f5e", function(err, result) {
         req.user = result;

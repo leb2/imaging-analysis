@@ -36,7 +36,7 @@ router.get('/', function (req, res, next) {
  */
 router.post('/share', loggedIn, function(req, res, next) {
   let sharedPath = new SharedPath({
-    path: req.body.path,
+    path: path.normalize(req.body.path),
     user_id: req.user._id
   });
 
@@ -57,19 +57,18 @@ router.get('/view/:user_id', function(req, res, next) {
   const back = req.query.back != undefined;
 
   let user_id = req.params.user_id;
+  console.log("This is teh user: ");
+  console.log(req.user);
   let isViewing = req.user == undefined || user_id != req.user._id;
+  console.log("This is the viewing status " + isViewing);
 
-  // TODO: Lookup
   listfiles(user_id, rel_path, back, isViewing, function(results) {
-    if (results) {
-      results['viewing'] = isViewing;
-      results['viewingId'] = user_id;
-      res.render('home', results)
-
-    } else {
-      // File is not shared
-      return next();
+    if (!results) {
+      results = {cannotAccess: true};
     }
+    results['viewing'] = isViewing;
+    results['viewingId'] = user_id;
+    res.render('home', results);
   });
 });
 
