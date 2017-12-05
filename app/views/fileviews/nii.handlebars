@@ -2,7 +2,9 @@
 <script type="text/javascript">
   var params = [];
   var path = "{{ path }}";
-  var url = "/file/data?path=" + path;
+  var url = "{{ data_url }}" + "?path=" + path;
+  console.log(url);
+  console.log(path);
 
   params["images"] = [url];
 

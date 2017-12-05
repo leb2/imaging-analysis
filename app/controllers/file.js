@@ -70,20 +70,26 @@ router.get('/download/:id', loggedIn, function(req, res) {
   res.download(file);
 });
 
-router.get('/view', loggedIn, function(req, res) {
-  let user_dir = util.get_user_dir(req.user._id);
+/*
+  Route to download / display file when clicked
+ */
+router.get('/view/:id', function(req, res) {
+  // let user_dir = util.get_user_dir(req.user._id);
+  let user_dir = util.get_user_dir(req.params.id);
   let rel_path = req.query.path;
   let full_path = path.join(user_dir, rel_path);
 
   if (rel_path.endsWith(".nii") || rel_path.endsWith('.nii.gz')) {
-    res.render('fileviews/nii', {path: rel_path});
+    let data_url = '/file/data/' + req.params.id;
+    res.render('fileviews/nii', {path: rel_path, data_url: data_url});
   } else {
     res.sendfile(full_path);
   }
 });
 
-router.get('/data', loggedIn, function(req, res) {
-  let user_dir = util.get_user_dir(req.user._id);
+router.get('/data/:id', function(req, res) {
+  // let user_dir = util.get_user_dir(req.user._id);
+  let user_dir = util.get_user_dir(req.params.id);
   let rel_path = req.query.path;
   let full_path = path.join(user_dir, rel_path);
 
