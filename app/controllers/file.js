@@ -27,7 +27,7 @@ module.exports = function(app) {
 
 // Links uploaded file to file object in database
 router.post('/', loggedIn, upload.single('uploadedFile'), function(req, res) {
-  const user_dir = util.get_user_dir(req.user);
+  const user_dir = util.get_user_dir(req.user._id);
   const destination_path = path.join(user_dir, req.file.originalname);
   const source_path = req.file.path;
 
@@ -41,7 +41,7 @@ router.post('/', loggedIn, upload.single('uploadedFile'), function(req, res) {
   }
 
   cp.execSync('chmod -R 755 ' + user_dir);
-  res.redirect('home');
+  res.redirect('/view');
 });
 
 
@@ -55,7 +55,7 @@ router.post('/list', loggedIn, function(req, res) {
 });
 
 router.post('/delete', loggedIn, function(req, res) {
-  let user_dir = util.get_user_dir(req.user);
+  let user_dir = util.get_user_dir(req.user._id);
   let rel_path = req.body.path;
   let file = req.body.file;
   let full_path = path.join(user_dir, rel_path, file);
