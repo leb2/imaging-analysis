@@ -71,7 +71,7 @@ router.get('/download/:id', loggedIn, function(req, res) {
 });
 
 router.get('/view', loggedIn, function(req, res) {
-  let user_dir = util.get_user_dir(req.user);
+  let user_dir = util.get_user_dir(req.user._id);
   let rel_path = req.query.path;
   let full_path = path.join(user_dir, rel_path);
 
@@ -83,7 +83,7 @@ router.get('/view', loggedIn, function(req, res) {
 });
 
 router.get('/data', loggedIn, function(req, res) {
-  let user_dir = util.get_user_dir(req.user);
+  let user_dir = util.get_user_dir(req.user._id);
   let rel_path = req.query.path;
   let full_path = path.join(user_dir, rel_path);
 
