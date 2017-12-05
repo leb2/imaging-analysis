@@ -36,7 +36,7 @@ router.post('/', loggedIn, upload.single('uploadedFile'), function(req, res) {
   fs.renameSync(source_path, destination_path);
 
   if (req.file.originalname.slice(req.file.originalname.length - 4) == '.zip') {
-    cp.execSync('unzip -o' + destination_path, {cwd: user_dir});
+    cp.execSync('unzip -o ' + destination_path, {cwd: user_dir});
     cp.execSync('rm ' + destination_path);
   }
 
