@@ -20,7 +20,8 @@ var config = {
     },
     port: process.env.PORT || 3000,
     domain: 'http://localhost:3000',
-    db: 'mongodb://mongodb:27017/utra-test'
+    db: 'mongodb://localhost/utra-test'
+    // db: 'mongodb://mongodb:27017/utra-test'
   },
 
   production: {
@@ -30,8 +31,8 @@ var config = {
     },
     port: process.env.PORT || 4000,
     domain: 'http://rapp.bigcomplexdata.com:4000',
-    db: 'mongodb://mongodb:27017/utra-production'
-    // db: 'mongodb://localhost/utra-production'
+    // db: 'mongodb://mongodb:27017/utra-production'
+    db: 'mongodb://localhost/utra-production'
   }
 };
 
