@@ -137,6 +137,12 @@ button, .button {
       color: darken($color-primary, 10);
     }
 
+    .hash {
+      display: inline-block;
+      width: 100px;
+      font-family: "Courier New", Courier, monospace;
+    }
+
     &.non-directory a, &.non-directory {
       color: #555;
     }

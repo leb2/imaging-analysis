@@ -31,13 +31,9 @@ router.post('/run', loggedIn, function(req, res, next) {
   let scriptPath = req.body.scriptPath;
   let argPath = Util.rel_to_full(req.user._id, req.body.argPath);
 
-
   let cdCommand = 'cd ' + Util.get_user_dir(req.user._id);
   let scriptCommand = scriptPath + ' ' + argPath;
   let fullCommand = cdCommand + ' && ./' + scriptCommand;
-
-  console.log("Command: ");
-  console.log(fullCommand);
 
   let jobSubmission = new JobSubmission({
     scriptPath: scriptPath,

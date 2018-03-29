@@ -57,10 +57,7 @@ router.get('/view/:user_id', function(req, res, next) {
   const back = req.query.back != undefined;
 
   let user_id = req.params.user_id;
-  console.log("This is teh user: ");
-  console.log(req.user);
   let isViewing = req.user == undefined || user_id != req.user._id;
-  console.log("This is the viewing status " + isViewing);
 
   listfiles(user_id, rel_path, back, isViewing, function(results) {
     if (!results) {
@@ -68,6 +65,7 @@ router.get('/view/:user_id', function(req, res, next) {
     }
     results['viewing'] = isViewing;
     results['viewingId'] = user_id;
+
     res.render('home', results);
   });
 });

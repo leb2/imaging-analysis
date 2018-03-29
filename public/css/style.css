@@ -120,6 +120,10 @@ button, .button {
       display: inline-block; }
     .files-container .file.directory a, .files-container .file.directory {
       color: #5a8c5d; }
+    .files-container .file .hash {
+      display: inline-block;
+      width: 100px;
+      font-family: "Courier New", Courier, monospace; }
     .files-container .file.non-directory a, .files-container .file.non-directory {
       color: #555; }
     .files-container .file:hover {

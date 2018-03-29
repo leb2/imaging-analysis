@@ -47,6 +47,10 @@
               {{#each files}}
                 {{#if this.isDirectory}}
                   <div class="file directory">
+                    <div class="hash">
+                      {{this.hash}}
+                    </div>
+
                     <a href="/view/{{../viewingId}}?path={{ ../path }}/{{ this.name }}">
                       <i class="ion-ios-folder"></i>
                       <span class="name">{{ this.name }}</span>
@@ -67,11 +71,16 @@
                   </div>
                 {{else}}
                   <div class="file non-directory">
+                    <div class="hash">
+                      {{this.hash}}
+                    </div>
 
                     <a href="/file/view/{{../viewingId}}?path={{ ../path }}/{{ this.name }}">
                       <i class="ion-document-text"></i>
                       <span class="name">{{ this.name }}</span>
                     </a>
+
+
 
                     {{#unless ../viewing}}
                       <i class="ion-arrow-down-b dropdown-icon"></i>
