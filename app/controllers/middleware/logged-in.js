@@ -9,11 +9,8 @@ module.exports = function(req, res, next) {
   } else {
     if (true || env == 'development') {
       // TODO: Temp for debugging purposes only
-      console.log("Trying to find your user...");
       User.findById("59d3d46423b3cb3898c10f5e", function(err, result) {
         req.user = result;
-        console.log(err);
-        console.log(result);
         next()
       });
     } else {

@@ -37,9 +37,10 @@ router.post('/run', loggedIn, function(req, res, next) {
   });
 
 
-  jobSubmission.save(function() {
+  jobSubmission.save(function(err, job) {
     // Create and navigate to directory for job to run in
     let jobsDirectory = Util.get_user_dir(req.user._id, 'jobs');
+    jobsDirectory = path.join(jobsDirectory, job._id.toString());
     let mkdirCommand = 'mkdir -p ' + jobsDirectory;
     let cdCommand = 'cd ' + jobsDirectory;
 
@@ -49,7 +50,7 @@ router.post('/run', loggedIn, function(req, res, next) {
 
     let runCommand = './' + path.basename(scriptPath) + ' ' + path.basename(argPath);
     let fullCommand = mkdirCommand + ' && ' + cpScriptCommand + ' && ' + cpArgCommand + ' && ' +  cdCommand + ' && ' + runCommand;
-    console.log(fullCommand);
+    // console.log(fullCommand);
 
     cp.exec(fullCommand, function(error, stdout, stderr) {
       if (error) {

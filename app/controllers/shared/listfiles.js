@@ -5,8 +5,10 @@ const Util  = require('../shared/util');
 const cp = require('child_process');
 
 
-
-module.exports = function(user_id, rel_path, back, isViewing, callback) {
+module.exports = function(user_id, rel_path, back, isViewing, callback, prefix, suffix) {
+  if (suffix == undefined) {
+    suffix = '';
+  }
   user_id = user_id.toString();
   if (back) {
     rel_path = rel_path.substr(0, rel_path.lastIndexOf("/"));
@@ -18,8 +20,9 @@ module.exports = function(user_id, rel_path, back, isViewing, callback) {
       callback(false);
 
     } else {
-      let user_dir = util.rel_to_full(user_id, rel_path);
+      let user_dir = path.join(util.rel_to_full(user_id, rel_path, prefix), suffix);
 
+      console.log("Searching " + user_dir);
       fs.readdir(user_dir, function(err, items) {
         if (items == undefined) {
           callback({
@@ -41,7 +44,6 @@ module.exports = function(user_id, rel_path, back, isViewing, callback) {
               hash = hash.substr(0, 10);
             }
 
-            console.log(hash);
             files.push({
               name: items[i],
               hash: hash,
