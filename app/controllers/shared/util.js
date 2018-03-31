@@ -4,14 +4,23 @@ const mongoose = require('mongoose');
 const SharedPath = require("../../models/shared-path");
 
 module.exports = class Util {
-  static get_user_dir(user_id) {
+  /**
+   * Get the directory where the files are stored for a user
+   * @param user_id: Id of user
+   * @param prefix: The name of the base directory
+   * @returns {string|*} The full path to directory
+   */
+  static get_user_dir(user_id, prefix) {
+    if (prefix == undefined) {
+      prefix = 'uploads';
+    }
     user_id = user_id.toString();
-    return path.join(config.root, 'uploads', user_id);
+    return path.join(config.root, prefix, user_id);
   }
 
-  static rel_to_full(user_id, rel_path) {
+  static rel_to_full(user_id, rel_path, prefix) {
     user_id = user_id.toString();
-    return path.join(this.get_user_dir(user_id), rel_path);
+    return path.join(this.get_user_dir(user_id, prefix), rel_path);
   }
 
   static is_shared(rel_path, user_id, callback) {

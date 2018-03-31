@@ -28,25 +28,42 @@ router.get('/', loggedIn, function (req, res, next) {
 });
 
 router.post('/run', loggedIn, function(req, res, next) {
-  let scriptPath = req.body.scriptPath;
   let argPath = Util.rel_to_full(req.user._id, req.body.argPath);
-
-  let cdCommand = 'cd ' + Util.get_user_dir(req.user._id);
-  let scriptCommand = scriptPath + ' ' + argPath;
-  let fullCommand = cdCommand + ' && ./' + scriptCommand;
+  let scriptPath = Util.rel_to_full(req.user._id, req.body.scriptPath);
 
   let jobSubmission = new JobSubmission({
-    scriptPath: scriptPath,
+    scriptPath: req.body.scriptPath,
     user_id: req.user._id
   });
 
-  jobSubmission.save(function() {
-    cp.exec(fullCommand, function() {
-      console.log("Script ran successfully: " + fullCommand);
 
-      jobSubmission.finished = true;
-      jobSubmission.save();
+  jobSubmission.save(function() {
+    // Create and navigate to directory for job to run in
+    let jobsDirectory = Util.get_user_dir(req.user._id, 'jobs');
+    let mkdirCommand = 'mkdir -p ' + jobsDirectory;
+    let cdCommand = 'cd ' + jobsDirectory;
+
+    // Copy files to directory
+    let cpScriptCommand = 'cp ' + scriptPath + ' ' + jobsDirectory;
+    let cpArgCommand = 'cp ' + argPath + ' ' + jobsDirectory;
+
+    let runCommand = './' + path.basename(scriptPath) + ' ' + path.basename(argPath);
+    let fullCommand = mkdirCommand + ' && ' + cpScriptCommand + ' && ' + cpArgCommand + ' && ' +  cdCommand + ' && ' + runCommand;
+    console.log(fullCommand);
+
+    cp.exec(fullCommand, function(error, stdout, stderr) {
+      if (error) {
+        console.log("ERROR occured while trying to run script: ");
+        console.log(stdout);
+        console.log(stderr);
+        next()
+      } else {
+        console.log("Script ran successfully: " + fullCommand);
+
+        jobSubmission.finished = true;
+        jobSubmission.save();
+        res.sendStatus(200);
+      }
     });
-    res.sendStatus(200);
   })
 });
